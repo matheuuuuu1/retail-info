@@ -1,0 +1,38 @@
+# --- Entorno de Base de Datos ---
+# No subas archivos de configuración locales o backups de SQL
+*.backup
+*.dump
+.pgpass
+
+# --- Datos (IMPORTANTE) ---
+# Los archivos RAW de datos suelen ser pesados. Es mejor que el usuario los descargue aparte
+# o que solo subas una muestra pequeña (sample).
+data/raw/*.csv
+data/processed/
+
+# --- Python / Jupyter Notebooks ---
+# Archivos temporales de Jupyter
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Archivos de entorno virtual
+venv/
+.env
+env/
+bin/
+lib/
+
+# Caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- IDEs y Sistema ---
+# Archivos de configuración de VS Code o IntelliJ
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
