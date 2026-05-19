@@ -1,0 +1,3 @@
+-- Cambiar los IDs a números y sus columnas a numéricas después que estén en sus tablas. Cambiar brands por sus nombres
+-- Crear sales_amount interactivo
+-- Convertir date a date
