@@ -1,12 +1,13 @@
 INSERT INTO CUSTOMER
-SELECT DISTINCT
+SELECT DISTINCT ON (customer_id)
     customer_id,
     customer_gender,
     customer_age_group,
     customer_segment,
     region
 FROM crudo
-WHERE customer_id IS NOT NULL;
+WHERE customer_id IS NOT NULL
+ORDER BY customer_id, transaction_date DESC;
 
 INSERT INTO PRODUCT
 SELECT DISTINCT
@@ -19,14 +20,15 @@ FROM crudo
 WHERE product_id IS NOT NULL;
 
 INSERT INTO TRANSACTIONS
-SELECT DISTINCT
+SELECT DISTINCT ON (transaction_id)
     transaction_id,
     customer_id,
     transaction_date,
     payment_method,
     sales_channel
 FROM crudo
-WHERE transaction_id IS NOT NULL;
+WHERE transaction_id IS NOT NULL
+ORDER BY transaction_id, transaction_date DESC;
 
 INSERT INTO SALE
 SELECT
