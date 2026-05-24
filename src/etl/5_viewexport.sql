@@ -1,4 +1,4 @@
-CREATE VIEW vista_reporte_total AS
+CREATE VIEW processed AS
 SELECT 
     t.transaction_id,
     t.transaction_date,
