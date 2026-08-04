@@ -36,3 +36,7 @@ Thumbs.db
 
 # --- Logs ---
 *.log
+
+# --- Credenciales (¡NO SUBIR A GITHUB!) ---
+.claude/
+kaggle.json
