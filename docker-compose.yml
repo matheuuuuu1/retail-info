@@ -1,0 +1,51 @@
+# Retail (WIP) - ETL con MariaDB
+services:
+  db:
+    image: mariadb:11
+    container_name: retail-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD:-root1234}
+      MARIADB_DATABASE: ${DB_NAME:-retail}
+    volumes:
+      - retail_db_data:/var/lib/mysql
+      - ./src/etl:/docker-entrypoint-initdb.d:ro
+    networks:
+      - retail-net
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  etl:
+    build: .
+    container_name: retail-etl
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_USER: ${DB_USER:-root}
+      DB_PASSWORD: ${DB_PASSWORD:-root1234}
+      DB_NAME: ${DB_NAME:-retail}
+      KAGGLE_CONFIG_DIR: /root/.kaggle
+    volumes:
+      - retail_data:/work/data
+      - ./src/func/kaggle.json:/root/.kaggle/kaggle.json:ro
+      - retail_outputs:/work/outputs
+    stdin_open: true
+    tty: true
+    networks:
+      - retail-net
+
+volumes:
+  retail_db_data:
+  retail_data:
+  retail_outputs:
+
+networks:
+  retail-net:
+    driver: bridge
