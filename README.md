@@ -129,12 +129,6 @@ Recorrido visual del proyecto: de la fuente de datos al resultado final.
 
 **Qué se ve en la imagen:** el dashboard con los KPIs globales del negocio (ingresos **$11.37M**, ticket promedio **$379**, margen **19.49%**, devoluciones **10.11%**, uso de cupones **68.10%**) y la distribución de los segmentos de clientes. Es donde converge todo el pipeline (Fase 4).
 
-## 🗺️ Roadmap
-
-- [x] **Fase 0–2**: ingesta, MariaDB/SQL, ETL + K-Means
-- [ ] **Fase 3**: análisis estadístico en R + reporte R Markdown
-- [ ] **Fase 4**: dashboard Power BI y/o web interactiva
-
 ## 🔐 Seguridad
 
 Las credenciales están **gitignored** (`.claude/`, `kaggle.json`). Configura las tuyas localmente sin subirlas al repositorio. La contraseña de la BD se maneja por variable de entorno.
