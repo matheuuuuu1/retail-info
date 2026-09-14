@@ -17,6 +17,7 @@ data/processed/
 
 # Archivos de entorno virtual
 venv/
+.venv/
 .env
 env/
 bin/
@@ -36,6 +37,9 @@ Thumbs.db
 
 # --- Logs ---
 *.log
+
+# --- R ---
+.Rhistory
 
 # --- Credenciales (¡NO SUBIR A GITHUB!) ---
 .claude/

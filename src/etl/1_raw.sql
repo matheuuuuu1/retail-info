@@ -56,7 +56,7 @@ CREATE TABLE raw_data (
 -- NOTA: Si usas DBeaver/DataGrip, utiliza el asistente de importación GUI apuntando a 'raw_data'.
 -- Si usas CLI de MariaDB, activa local_infile y usa la siguiente consulta:
 
-LOAD DATA LOCAL INFILE 'C:/Git/Retail (WIP)/data/raw/ecommerce_orders_dataset.csv'
+LOAD DATA LOCAL INFILE '/home/matheus/Git/retail-info/data/raw/ecommerce_orders_dataset.csv'
 INTO TABLE raw_data
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'

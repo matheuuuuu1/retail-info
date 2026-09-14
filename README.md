@@ -101,6 +101,34 @@ Dataset de **30,000 órdenes**:
 
 **Segmentos de clientes (K-Means):** VIP/Alto Valor (935) · Frecuentes (3,787) · En Riesgo/Inactivos (2,156) · Nuevos/Ocasionales (1,805).
 
+## 📸 Evidencias del pipeline
+
+Recorrido visual del proyecto: de la fuente de datos al resultado final.
+
+### Captura 1 — Dataset fuente (Kaggle)
+
+![Dataset en Kaggle](docs/images/01-dataset-kaggle.png)
+
+**Qué se ve en la imagen:** la página del dataset *E-Commerce Orders Dataset 2026* en Kaggle, el origen real de los datos: ~30,000 órdenes y 41 columnas en el archivo `ecommerce_orders_dataset.csv`. Todo arranca aquí: `src/func/down.py` lo descarga con `kagglehub` (Fase 0).
+
+### Captura 2 — Modelo normalizado en la base de datos
+
+![Modelo normalizado en DBeaver](docs/images/02-diagrama-sql.png)
+
+**Qué se ve en la imagen:** el esquema de la base `ecommerce_orders` (DBeaver o diagrama ERD): la tabla cruda `raw_data` como staging fiel al CSV, normalizada en `customers`, `products` y `orders` con claves foráneas, más las 5 vistas analíticas (`vw_*`) listas para consumo analítico. Es el resultado de la Fase 1 (SQL / MariaDB): de datos sucios a modelo listo para el negocio.
+
+### Captura 3 — Código de la segmentación K-Means
+
+![Código K-Means en ml.py](docs/images/03-codigo-kmeans.png)
+
+**Qué se ve en la imagen:** la función `preprocess_and_cluster()` de `src/etl/ml.py`: selección de features tipo RFM (`total_spend_lifetime`, `days_since_last_order`, `total_returned_orders`, …), estandarización con `StandardScaler` y entrenamiento de **K-Means con k=4**, seguido del mapeo de cada cluster a un segmento de negocio (VIP / Frecuentes / En Riesgo / Ocasionales). Es la Fase 2.
+
+### Captura 4 — Dashboard ejecutivo
+
+![Dashboard ejecutivo](docs/images/04-dashboard.jpg)
+
+**Qué se ve en la imagen:** el dashboard con los KPIs globales del negocio (ingresos **$11.37M**, ticket promedio **$379**, margen **19.49%**, devoluciones **10.11%**, uso de cupones **68.10%**) y la distribución de los segmentos de clientes. Es donde converge todo el pipeline (Fase 4).
+
 ## 🗺️ Roadmap
 
 - [x] **Fase 0–2**: ingesta, MariaDB/SQL, ETL + K-Means
