@@ -1,6 +1,6 @@
 # 🛒 Retail — Pipeline de Análisis E-Commerce
 
-Pipeline **ETL de extremo a extremo** sobre un dataset público de órdenes de e-commerce (Kaggle): desde la ingesta cruda en MariaDB, pasando por normalización, vistas analíticas, **segmentación de clientes con K-Means**, análisis estadístico en **R** y visualización ejecutiva en **Power BI / web**.
+Pipeline **ETL de extremo a extremo** sobre un dataset público de órdenes de e-commerce (Kaggle): desde la ingesta cruda en MariaDB, pasando por normalización, vistas analíticas, **segmentación de clientes con K-Means** y visualización ejecutiva en **Power BI / web**.
 
 ## ✅ Estado del pipeline
 
@@ -9,8 +9,7 @@ Pipeline **ETL de extremo a extremo** sobre un dataset público de órdenes de e
 | 0 | Ingesta del dataset | Python (`kagglehub`) | ✅ |
 | 1 | Carga cruda, normalización y vistas | SQL / MariaDB | ✅ |
 | 2 | ETL + segmentación (K-Means) | Python (`pandas`, `scikit-learn`, `SQLAlchemy`) | ✅ |
-| 3 | Análisis estadístico y reporte técnico | R (`ggplot2`, R Markdown) | ⏳ pendiente |
-| 4 | Dashboard ejecutivo + web interactiva | Power BI · HTML/CSS/JS (Plotly) | ⏳ pendiente |
+| 3 | Dashboard ejecutivo + web interactiva | Power BI · HTML/CSS/JS (Plotly) | ✅ |
 
 > Diagrama de arquitectura completo (Mermaid): [`docs/pipeline_architecture.md`](docs/pipeline_architecture.md)
 
@@ -25,16 +24,14 @@ Kaggle ──▶ CSV crudo ──▶ MariaDB (raw_data) ──▶ Modelo normali
                                                         │
                                               processed_customer_clusters
                                                         │
-                                    ┌───────────────────┴───────────────────┐
-                                 R (hipótesis, ggplot2,          Power BI / Web
-                                 R Markdown reporte)            (dashboard)
+                                                        ▼
+                                               Power BI / Web (dashboard)
 ```
 
 ## 🧰 Tecnologías
 
 - **Base de datos:** MariaDB (MySQL-compatible)
 - **ETL / ML:** Python — `pandas`, `scikit-learn`, `SQLAlchemy`, conector oficial `mariadb`
-- **Análisis:** R — `ggplot2`, `stats`, R Markdown
 - **Visualización:** Power BI · HTML/CSS/JS (Plotly / Streamlit)
 
 ## 📁 Estructura del proyecto
@@ -60,7 +57,6 @@ Kaggle ──▶ CSV crudo ──▶ MariaDB (raw_data) ──▶ Modelo normali
 ### Requisitos
 - **MariaDB** corriendo en local (puerto 3306 por defecto)
 - **Python 3.12+** con: `pandas`, `scikit-learn`, `sqlalchemy`, `mariadb` (conector oficial)
-- **R** + `DBI`, `RMariaDB`/`RMySQL`, `ggplot2`, `rmarkdown` *(para la Fase 3)*
 
 ### Fase 0 — Descarga del dataset
 ```bash
@@ -83,8 +79,8 @@ Lee `vw_customer_aggregations`, estandariza features tipo RFM y ejecuta **K-Mean
 
 Conexión por variables de entorno: `DB_USER`, `DB_PASS`, `DB_HOST`, `DB_PORT`, `DB_NAME`.
 
-### Fase 3 y 4 — R y visualización *(en desarrollo)*
-Análisis estadístico con R y dashboards en Power BI / web.
+### Fase 3 — Dashboard ejecutivo
+Dashboard con KPIs del negocio y distribución de segmentos de clientes.
 
 ## 📊 Resultados validados (2026-08-04)
 
@@ -129,6 +125,14 @@ Recorrido visual del proyecto: de la fuente de datos al resultado final.
 
 **Qué se ve en la imagen:** el dashboard con los KPIs globales del negocio (ingresos **$11.37M**, ticket promedio **$379**, margen **19.49%**, devoluciones **10.11%**, uso de cupones **68.10%**) y la distribución de los segmentos de clientes. Es donde converge todo el pipeline (Fase 4).
 
+<<<<<<< HEAD
+=======
+## 🗺️ Roadmap
+
+- [x] **Fase 0–2**: ingesta, MariaDB/SQL, ETL + K-Means
+- [x] **Fase 3**: dashboard ejecutivo
+
+>>>>>>> 661cd77 (idk what changed)
 ## 🔐 Seguridad
 
 Las credenciales están **gitignored** (`.claude/`, `kaggle.json`). Configura las tuyas localmente sin subirlas al repositorio. La contraseña de la BD se maneja por variable de entorno.
